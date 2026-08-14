@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = 'com.example.app'
+    namespace = 'com.rauaap.remember'
     compileSdk = 36
     buildToolsVersion = '36.0.0'
 
     defaultConfig {
-        applicationId = 'com.example.app'
+        applicationId = 'com.rauaap.remember'
         minSdk = 36
         targetSdk = 36
         versionCode = 1

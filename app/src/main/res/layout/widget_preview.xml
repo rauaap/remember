@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shown in the widget picker, before an instance (and its settings) exists.
+     Mirrors widget_checklists.xml with the default styling baked in: the row
+     padding here is what WidgetSettings derives from the default 15 sp font. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_preview_background"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="5dp"
+        android:text="@string/preview_row_1"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="5dp"
+        android:text="@string/preview_row_2"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="5dp"
+        android:text="@string/preview_row_3"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp" />
+</LinearLayout>

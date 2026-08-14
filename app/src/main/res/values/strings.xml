@@ -1,3 +1,42 @@
 <resources>
-    <string name="app_name">AndroidApp</string>
+    <string name="app_name">Remember</string>
+
+    <!-- Checklists -->
+    <string name="new_checklist">New checklist</string>
+    <string name="rename_checklist">Rename checklist</string>
+    <string name="checklist_name_hint">Checklist name</string>
+    <string name="no_checklists">No checklists yet.\nTap “New checklist” to start one.</string>
+    <string name="no_items">Nothing on this list yet.</string>
+    <string name="new_item_hint">Add an item</string>
+    <string name="item_hint">Item</string>
+    <string name="edit_item">Edit item</string>
+    <string name="add">Add</string>
+    <string name="uncheck_all">Uncheck all</string>
+    <string name="rename">Rename</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="delete_title">Delete “%1$s”?</string>
+    <string name="delete_message">This cannot be undone.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Your checklists, one tap away.</string>
+    <string name="widget_empty">No checklists yet — tap to open Remember.</string>
+
+    <!-- Widget settings -->
+    <string name="widget_settings">Widget settings</string>
+    <string name="font_size">Font size</string>
+    <string name="text_color">Text color</string>
+    <string name="background_color">Background color</string>
+    <string name="border_radius">Border radius</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="set">Set</string>
+    <string name="hex">Hex</string>
+    <string name="alpha">A</string>
+    <string name="red">R</string>
+    <string name="green">G</string>
+    <string name="blue">B</string>
+    <string name="preview_row_1">Groceries</string>
+    <string name="preview_row_2">Packing list</string>
+    <string name="preview_row_3">Morning routine</string>
 </resources>

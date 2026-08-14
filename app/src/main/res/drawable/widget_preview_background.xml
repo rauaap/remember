@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Static stand-in for the runtime-styled widget background, used by the
+     widget picker preview before any settings exist. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/widget_background_default" />
+    <corners android:radius="16dp" />
+</shape>
