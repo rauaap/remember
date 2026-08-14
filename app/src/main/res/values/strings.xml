@@ -18,6 +18,15 @@
     <string name="delete_title">Delete “%1$s”?</string>
     <string name="delete_message">This cannot be undone.</string>
 
+    <!-- Quick settings tile and pinned notifications -->
+    <string name="tile_label">New checklist</string>
+    <string name="quick_checklist_name">List %1$d</string>
+    <string name="channel_pinned_checklists">Pinned checklists</string>
+    <string name="notification_progress">%1$d of %2$d ticked off</string>
+    <string name="notification_no_items">Nothing on this list yet.</string>
+    <string name="dismiss_notification">Dismiss</string>
+    <string name="notifications_blocked">Turn on notifications for Remember to pin a checklist.</string>
+
     <!-- Widget -->
     <string name="widget_description">Your checklists, one tap away.</string>
     <string name="widget_empty">No checklists yet — tap to open Remember.</string>

@@ -13,7 +13,8 @@ import java.util.List;
 /**
  * The whole checklist database: a JSON array in SharedPreferences, held in a
  * process-wide cache. Every mutation persists and refreshes the home screen
- * widgets, so callers never have to remember to do either.
+ * widgets and pinned notifications, so callers never have to remember to do any
+ * of it.
  */
 public final class ChecklistStore {
 
@@ -159,6 +160,7 @@ public final class ChecklistStore {
         }
         prefs(context).edit().putString(KEY_DATA, json.toString()).apply();
         ChecklistWidgetProvider.updateAll(context);
+        ChecklistNotifications.refresh(context);
     }
 
     private static SharedPreferences prefs(Context context) {

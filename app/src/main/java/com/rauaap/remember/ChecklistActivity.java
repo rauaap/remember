@@ -1,7 +1,9 @@
 package com.rauaap.remember;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,15 @@ import java.util.List;
 public class ChecklistActivity extends Activity {
 
     public static final String EXTRA_CHECKLIST_ID = "checklist_id";
+
+    /**
+     * Set by the quick settings tile: pin this checklist to the notification
+     * shade once opened. The activity does it rather than the tile because only
+     * an activity can ask for the notification permission.
+     */
+    public static final String EXTRA_PIN_NOTIFICATION = "pin_notification";
+
+    private static final int REQUEST_POST_NOTIFICATIONS = 1;
 
     private String checklistId;
     private final List<Checklist.Item> items = new ArrayList<>();
@@ -64,6 +76,23 @@ public class ChecklistActivity extends Activity {
             ChecklistStore.uncheckAll(this, checklistId);
             reload();
         });
+
+        // A list started from the tile arrives with a placeholder name, so the
+        // title is the one place it can be renamed without going back home.
+        titleView.setOnClickListener(v -> Dialogs.prompt(
+                this,
+                R.string.rename_checklist,
+                R.string.checklist_name_hint,
+                titleView.getText().toString(),
+                title -> {
+                    ChecklistStore.rename(this, checklistId, title);
+                    reload();
+                }));
+
+        if (savedInstanceState == null
+                && getIntent().getBooleanExtra(EXTRA_PIN_NOTIFICATION, false)) {
+            pinNotification();
+        }
     }
 
     @Override
@@ -71,6 +100,33 @@ public class ChecklistActivity extends Activity {
         super.onResume();
         if (!isFinishing()) {
             reload();
+        }
+    }
+
+    /** Pins the checklist, asking for the notification permission if it is missing. */
+    private void pinNotification() {
+        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED) {
+            ChecklistNotifications.pin(this, checklistId);
+        } else {
+            requestPermissions(
+                    new String[] {Manifest.permission.POST_NOTIFICATIONS},
+                    REQUEST_POST_NOTIFICATIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode != REQUEST_POST_NOTIFICATIONS) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            ChecklistNotifications.pin(this, checklistId);
+        } else {
+            // The checklist is still there; it just has nothing in the shade.
+            Toast.makeText(this, R.string.notifications_blocked, Toast.LENGTH_LONG).show();
         }
     }
 

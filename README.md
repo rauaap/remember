@@ -3,7 +3,8 @@
 An offline checklist app for Android, with a home screen widget that lists your
 checklists and opens one with a single tap. The widget's appearance is yours to
 set — font size, text colour, background colour (RGBA, with hex entry) and
-corner radius, configured per widget instance.
+corner radius, configured per widget instance. A quick settings tile starts a
+new checklist and pins it to the notification shade.
 
 No accounts, no network, no third-party libraries: everything is stored in the
 app's own private preferences as JSON.
@@ -18,6 +19,27 @@ app's own private preferences as JSON.
 - **Tick an item off** — tap it. Ticked items are struck through and dimmed.
 - **Edit or delete an item** — long press it.
 - **Uncheck all** — the button beside the checklist's title, for lists you reuse.
+- **Rename the open checklist** — tap its title.
+
+## The quick settings tile
+
+Add *New checklist* from the quick settings panel's edit screen. One tap starts a
+checklist named `List 1` (`List 2`, and so on), opens it, and pins it to the
+notification shade. Tap the title to give it a real name.
+
+The pinned notification shows the checklist's name, how many items are ticked,
+and — when expanded — what is still outstanding, up to eight items. It follows
+the list: adding, ticking, renaming or deleting updates the notification, and
+deleting the checklist removes it. Tapping the notification opens the checklist.
+
+It is meant to stay put. It is marked ongoing and no-clear, so *Clear all* leaves
+it alone, and if you do swipe it away it comes straight back. **Dismiss**, the
+button on the notification, is the way to get rid of it — that only removes the
+notification, never the checklist. Pinned notifications are posted again after a
+reboot.
+
+The first tile tap asks for notification permission. Decline and you still get
+the checklist, just nothing in the shade.
 
 ## The widget
 
