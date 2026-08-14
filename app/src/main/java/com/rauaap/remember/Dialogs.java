@@ -53,11 +53,18 @@ final class Dialogs {
 
     static void confirmDelete(
             Context context, String name, final Runnable onConfirm) {
+        confirm(context, context.getString(R.string.delete_title, name),
+                R.string.delete, onConfirm);
+    }
+
+    /** Warns that the action cannot be undone, then runs it if confirmed. */
+    static void confirm(
+            Context context, String title, int confirmRes, final Runnable onConfirm) {
         new AlertDialog.Builder(context)
-                .setTitle(context.getString(R.string.delete_title, name))
+                .setTitle(title)
                 .setMessage(R.string.delete_message)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.delete, (d, which) -> onConfirm.run())
+                .setPositiveButton(confirmRes, (d, which) -> onConfirm.run())
                 .show();
     }
 }

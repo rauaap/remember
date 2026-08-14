@@ -12,11 +12,18 @@
     <string name="edit_item">Edit item</string>
     <string name="add">Add</string>
     <string name="uncheck_all">Uncheck all</string>
+    <string name="remove_checked">Remove checked</string>
+    <string name="back">Back to checklists</string>
     <string name="rename">Rename</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
     <string name="delete_title">Delete “%1$s”?</string>
     <string name="delete_message">This cannot be undone.</string>
+    <plurals name="remove_checked_title">
+        <item quantity="one">Remove 1 checked item?</item>
+        <item quantity="other">Remove %1$d checked items?</item>
+    </plurals>
 
     <!-- Quick settings tile and pinned notifications -->
     <string name="tile_label">New checklist</string>

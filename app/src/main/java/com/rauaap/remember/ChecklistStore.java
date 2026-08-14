@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -105,6 +106,23 @@ public final class ChecklistStore {
                 persist(context);
                 return;
             }
+        }
+    }
+
+    public static synchronized void deleteCheckedItems(Context context, String checklistId) {
+        Checklist checklist = get(context, checklistId);
+        if (checklist == null) {
+            return;
+        }
+        boolean changed = false;
+        for (Iterator<Checklist.Item> items = checklist.items.iterator(); items.hasNext(); ) {
+            if (items.next().checked) {
+                items.remove();
+                changed = true;
+            }
+        }
+        if (changed) {
+            persist(context);
         }
     }
 

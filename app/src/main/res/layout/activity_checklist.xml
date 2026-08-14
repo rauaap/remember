@@ -9,34 +9,73 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:baselineAligned="false"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp"
         android:paddingBottom="12dp">
 
-        <TextView
-            android:id="@+id/checklist_title"
+        <!-- Arrow and title stay centred against each other, and the pair sits at
+             the top of the row beside the taller stack of buttons. -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/text_primary"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical">
 
-        <Button
-            android:id="@+id/button_uncheck_all"
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="-12dp"
+                android:layout_marginEnd="4dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:id="@+id/checklist_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_primary"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:background="@drawable/button_outline"
-            android:minWidth="0dp"
-            android:paddingHorizontal="16dp"
-            android:text="@string/uncheck_all"
-            android:textAllCaps="false"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_uncheck_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_outline"
+                android:minWidth="0dp"
+                android:paddingHorizontal="16dp"
+                android:text="@string/uncheck_all"
+                android:textAllCaps="false"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/button_remove_checked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_outline"
+                android:minWidth="0dp"
+                android:paddingHorizontal="16dp"
+                android:text="@string/remove_checked"
+                android:textAllCaps="false"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout

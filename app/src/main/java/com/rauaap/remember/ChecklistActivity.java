@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class ChecklistActivity extends Activity {
     private ItemAdapter adapter;
     private TextView titleView;
     private EditText newItemField;
+    private View removeCheckedButton;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,10 @@ public class ChecklistActivity extends Activity {
 
         titleView = findViewById(R.id.checklist_title);
         newItemField = findViewById(R.id.new_item_field);
+        removeCheckedButton = findViewById(R.id.button_remove_checked);
         adapter = new ItemAdapter();
 
-        ListView list = findViewById(R.id.item_list);
+        list = findViewById(R.id.item_list);
         list.setEmptyView(findViewById(R.id.item_empty));
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id) -> {
@@ -76,6 +80,8 @@ public class ChecklistActivity extends Activity {
             ChecklistStore.uncheckAll(this, checklistId);
             reload();
         });
+        removeCheckedButton.setOnClickListener(v -> removeChecked());
+        findViewById(R.id.button_back).setOnClickListener(v -> openChecklists());
 
         // A list started from the tile arrives with a placeholder name, so the
         // title is the one place it can be renamed without going back home.
@@ -93,6 +99,31 @@ public class ChecklistActivity extends Activity {
                 && getIntent().getBooleanExtra(EXTRA_PIN_NOTIFICATION, false)) {
             pinNotification();
         }
+    }
+
+    /**
+     * Up to the home screen. The widget opens a checklist directly, so there may
+     * be no MainActivity behind this one to go back to.
+     */
+    private void openChecklists() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+    private void removeChecked() {
+        Checklist checklist = ChecklistStore.get(this, checklistId);
+        int checked = checklist == null ? 0 : checklist.checkedCount();
+        if (checked == 0) {
+            return;
+        }
+        String title = getResources().getQuantityString(
+                R.plurals.remove_checked_title, checked, checked);
+        Dialogs.confirm(this, title, R.string.remove, () -> {
+            ChecklistStore.deleteCheckedItems(this, checklistId);
+            reload();
+        });
     }
 
     @Override
@@ -138,6 +169,8 @@ public class ChecklistActivity extends Activity {
         ChecklistStore.addItem(this, checklistId, text);
         newItemField.setText("");
         reload();
+        // Items append to the end, which may be below the fold on a long list.
+        list.smoothScrollToPosition(items.size() - 1);
     }
 
     private void reload() {
@@ -150,6 +183,10 @@ public class ChecklistActivity extends Activity {
         items.clear();
         items.addAll(checklist.items);
         adapter.notifyDataSetChanged();
+
+        boolean anyChecked = checklist.checkedCount() > 0;
+        removeCheckedButton.setEnabled(anyChecked);
+        removeCheckedButton.setAlpha(anyChecked ? 1f : 0.4f);
     }
 
     private void showItemMenu(final Checklist.Item item) {

@@ -19,6 +19,10 @@ app's own private preferences as JSON.
 - **Tick an item off** — tap it. Ticked items are struck through and dimmed.
 - **Edit or delete an item** — long press it.
 - **Uncheck all** — the button beside the checklist's title, for lists you reuse.
+- **Remove checked items** — the button under **Uncheck all**, for clearing off
+  what's done. It asks first, and is greyed out while nothing is ticked.
+- **Back to your checklists** — the arrow beside the checklist's title. It
+  returns to the home screen even when the checklist was opened from the widget.
 - **Rename the open checklist** — tap its title.
 
 ## The quick settings tile
