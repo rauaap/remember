@@ -47,7 +47,7 @@
         </receiver>
 
         <service
-            android:name=".NewChecklistTileService"
+            android:name=".PinChecklistTileService"
             android:exported="true"
             android:icon="@drawable/ic_checklist_mono"
             android:label="@string/tile_label"

@@ -26,9 +26,10 @@ public class ChecklistActivity extends Activity {
     public static final String EXTRA_CHECKLIST_ID = "checklist_id";
 
     /**
-     * Set by the quick settings tile: pin this checklist to the notification
-     * shade once opened. The activity does it rather than the tile because only
-     * an activity can ask for the notification permission.
+     * Set by {@link MainActivity} when the quick settings tile sent you there to
+     * choose something to pin: pin this checklist to the notification shade once
+     * opened. The activity does it rather than the tile because only an activity
+     * can ask for the notification permission.
      */
     public static final String EXTRA_PIN_NOTIFICATION = "pin_notification";
 
@@ -83,8 +84,8 @@ public class ChecklistActivity extends Activity {
         removeCheckedButton.setOnClickListener(v -> removeChecked());
         findViewById(R.id.button_back).setOnClickListener(v -> openChecklists());
 
-        // A list started from the tile arrives with a placeholder name, so the
-        // title is the one place it can be renamed without going back home.
+        // Renaming from the title saves a trip back home, which matters most for
+        // a list opened straight from a widget or a pinned notification.
         titleView.setOnClickListener(v -> Dialogs.prompt(
                 this,
                 R.string.rename_checklist,

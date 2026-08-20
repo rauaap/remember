@@ -26,8 +26,8 @@
     </plurals>
 
     <!-- Quick settings tile and pinned notifications -->
-    <string name="tile_label">New checklist</string>
-    <string name="quick_checklist_name">List %1$d</string>
+    <string name="tile_label">Pin a checklist</string>
+    <string name="pin_hint">Open a checklist to pin it to the shade.</string>
     <string name="channel_pinned_checklists">Pinned checklists</string>
     <string name="notification_progress">%1$d of %2$d ticked off</string>
     <string name="notification_no_items">Nothing on this list yet.</string>
