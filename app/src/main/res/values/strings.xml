@@ -16,6 +16,7 @@
     <string name="back">Back to checklists</string>
     <string name="rename">Rename</string>
     <string name="edit">Edit</string>
+    <string name="copy">Copy</string>
     <string name="delete">Delete</string>
     <string name="remove">Remove</string>
     <string name="delete_title">Delete “%1$s”?</string>

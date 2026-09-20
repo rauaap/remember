@@ -3,6 +3,8 @@ package com.rauaap.remember;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -193,6 +195,7 @@ public class ChecklistActivity extends Activity {
     private void showItemMenu(final Checklist.Item item) {
         String[] actions = {
                 getString(R.string.edit),
+                getString(R.string.copy),
                 getString(R.string.delete),
         };
         new AlertDialog.Builder(this)
@@ -208,12 +211,20 @@ public class ChecklistActivity extends Activity {
                                     ChecklistStore.editItem(this, checklistId, item.id, text);
                                     reload();
                                 });
+                    } else if (which == 1) {
+                        copyItem(item);
                     } else {
                         ChecklistStore.deleteItem(this, checklistId, item.id);
                         reload();
                     }
                 })
                 .show();
+    }
+
+    /** The platform shows its own confirmation for this, so we stay quiet. */
+    private void copyItem(Checklist.Item item) {
+        ClipboardManager clipboard = getSystemService(ClipboardManager.class);
+        clipboard.setPrimaryClip(ClipData.newPlainText(item.text, item.text));
     }
 
     private class ItemAdapter extends BaseAdapter {
